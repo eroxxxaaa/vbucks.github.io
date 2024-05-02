@@ -5,155 +5,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ON1YONE SHOP</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+.bg-lights {
+background-color: rgba(255, 255, 255, 0.8);
+}
+.navbar-light .navbar-nav .nav-link {
+    color: white !important; /* Changed text color to white */
+}
+.dropdown-menu {
+    z-index: 1000; /* Increase the z-index to ensure it appears above other elements */
+}
+ .modal-content {
+        background-color: rgba(255, 255, 255, 0.4); /* White with 40% opacity */
+        backdrop-filter: blur(8px); /* Apply 8px blur effect */
+        border: none; /* Remove border */
+        border-radius: 10px; /* Add border radius */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+    }
+
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background-color: #000;
-            color: #fff;
+            background-color: #121212; /* Changed body background color */
+            color: #fff; /* Changed text color to white */
         }
 
         .navbar {
-            background-color: #111;
-            padding: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(255, 255, 255, 0.2); /* White with 20% opacity */
+            -webkit-backdrop-filter: blur(1.1875rem);
+            backdrop-filter: blur(1.1875rem);
+            border-radius: .75rem;
+            padding-left: 1.25rem;
+            padding-right: 1rem;
         }
+h5#basketModalLabel {
+    color: white;
+}div#basketItems {
+    color: white;
+}
 
         .navbar-brand {
-            font-size: 28px;
+            font-size: 20px; /* Reduced font size */
             font-weight: 700;
-            color: #fff;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .navbar-brand:hover {
             color: #ccc;
         }
 
-        .navbar-light .navbar-toggler-icon {
-            background-color: #fff;
-        }
-
         .container {
             padding: 20px;
         }
 
-        .card {
-            background-color: #222;
-            border: none;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
+        .navbar-nav .nav-item {
+            padding: 0 10px; /* Added padding to navbar items */
         }
 
-        .card:hover {
-            transform: translateY(-5px);
+        /* Rest of your styles remain the same */
+
+        @media (max-width: 767.98px) {
+            .navbar-nav {
+                flex-direction: column; /* Change direction to column for mobile */
+                align-items: flex-start; /* Align items to start */
+                background-color: rgba(255, 255, 255, 0.2); /* White with 20% opacity */
+                border-radius: 0; /* Remove border radius */
+                padding: 10px; /* Added padding */
+                width: 100%; /* Full width */
+            }
+
+            .navbar-toggler {
+                display: block; /* Show the toggler */
+            }
+
+            .collapse.show {
+                display: flex !important; /* Show the collapsed menu */
+                flex-direction: column;
+            }
+
+            .navbar-collapse {
+                flex-basis: auto;
+                flex-grow: 1;
+                text-align: left; /* Align text to left */
+            }
+
+            .navbar-nav .nav-item {
+                padding: 10px 0; /* Added padding to navbar items */
+            }
         }
 
-        .card-img-top {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
+@media (max-width: 767.98px) {
+    .navbar-nav {
+        flex-direction: column; /* Change direction to column for mobile */
+        align-items: flex-start; /* Align items to start */
+        background-color: rgba(255, 255, 255, 0.2); /* White with 20% opacity */
+        border-radius: 0; /* Remove border radius */
+        padding: 10px; /* Added padding */
+        width: 100%; /* Full width */
+    }
 
-        .card-body {
-            padding: 20px;
-        }
+    .navbar-toggler {
+        display: block; /* Show the toggler */
+    }
 
-        .card-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
+    .collapse.show {
+        display: flex !important; /* Show the collapsed menu */
+        flex-direction: column;
+    }
 
-        .card-text {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
+    .navbar-collapse {
+        flex-basis: auto;
+        flex-grow: 1;
+        text-align: left; /* Align text to left */
+    }
 
-        .btn-primary {
-            background-color: #ff0000;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 18px;
-            font-weight: 700;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .btn-primary:hover {
-            background-color: #ff3333;
-        }
-
-        .modal-content {
-            background-color: #111;
-            color: #fff;
-        }
-
-        .modal-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .form-control {
-            background-color: #333;
-            color: #fff;
-            border: 1px solid #555;
-        }
-
-        .form-control:focus {
-            background-color: #444;
-            border: 1px solid #ff0000;
-            color: #fff;
-        }
-
-        .btn-secondary {
-            background-color: #555;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 18px;
-            font-weight: 700;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .btn-secondary:hover {
-            background-color: #777;
-        }
-
-        .btn-primary, .btn-secondary {
-            margin-right: 10px;
-        }
+    .navbar-nav .nav-item {
+        padding: 10px 0; /* Added padding to navbar items */
+    }
+}
+.card-body {
+    background-color: rgba(255, 255, 255, 0.2); /* White with 20% opacity */
+    color: #fff; /* Set text color to white */
+    border-radius: 0.75rem; /* Add border radius */
+}
+.card {
+    background-color: transparent; /* Set card background to transparent */
+    border: none; /* Remove card border */
+}
     </style>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body>
+<body style="background-image: url('background.c9472257.webp'); background-size: cover; background-repeat: no-repeat; color: transparent;">
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-lights">
     <div class="container">
         <a class="navbar-brand" href="#">ON1YONE SHOP</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-shopping-basket"></i> Basket</a>
-                </li>
-            </ul>
-        </div>
+        <!-- Button to trigger the basket modal -->
+        <button type="button" class="btn btn-primary ml-auto mr-3" data-toggle="modal" data-target="#basketModal">
+            <i class="fas fa-shopping-basket"></i> Basket
+        </button>
     </div>
 </nav>
+
+<!-- Basket Modal -->
+<div class="modal fade" id="basketModal" tabindex="-1" role="dialog" aria-labelledby="basketModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="basketModalLabel">Basket</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Basket items will be dynamically added here -->
+                <div id="basketItems">
+                    <!-- Basket items will be added dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary clear-basket">Clear Basket</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container mt-5">
     <!-- Main content -->
     <form id="messageForm">
         <!-- Items with images and functionality -->
-        <div class="row">
-            <div class="col-md-3 mb-4">
+        <div class="row justify-content-center"><!-- Changed to center the cards -->
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card">
                     <img class="card-img-top" src="1000.jfif" alt="1000 V-Bucks">
                     <div class="card-body">
@@ -163,7 +197,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card">
                     <img class="card-img-top" src="2800.jfif" alt="2800 V-Bucks">
                     <div class="card-body">
@@ -173,7 +207,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card">
                     <img class="card-img-top" src="5000.jfif" alt="5000 V-Bucks">
                     <div class="card-body">
@@ -183,7 +217,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card">
                     <img class="card-img-top" src="13500.jfif" alt="13500 V-Bucks">
                     <div class="card-body">
@@ -195,40 +229,58 @@
             </div>
         </div>
         <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#contactInfoModal">Order</button>
+
     </form>
 </div>
-
-<!-- Confirmation Modal -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+<!-- Modal for Contact Information -->
+<div class="modal fade" id="contactInfoModal" tabindex="-1" role="dialog" aria-labelledby="contactInfoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel">Order Confirmation</h5>
+                <h5 class="modal-title" id="contactInfoModalLabel">Contact Information</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                We have received your order. We will contact you within 24 hours.
+                <!-- Add form fields for contact information here -->
+                <input type="text" id="fullName" placeholder="Full Name" class="form-control mb-2">
+                <input type="text" id="phoneNumber" placeholder="Phone Number" class="form-control mb-2">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <!-- Add the send order button here -->
+                <button type="button" class="btn btn-primary" id="sendOrderBtn">Send Order</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
+
+<!-- Bootstrap JS -->
 <!-- Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<!-- Your HTML code remains unchanged -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Added closing script tag -->
 
 <script>
- $(document).ready(function() {
+$(document).ready(function() {
     // Retrieve basket items from sessionStorage if available
     let basketItems = sessionStorage.getItem('basketItems') ? JSON.parse(sessionStorage.getItem('basketItems')) : {};
+
+    // Function to update basket items in the modal
+    function updateBasketModal() {
+        const basketItemsDiv = $("#basketItems");
+        basketItemsDiv.empty(); // Clear previous items
+
+        // Add each item in the basket to the modal
+        Object.keys(basketItems).forEach(function(item) {
+            basketItemsDiv.append(`<p>${item} (${basketItems[item]})</p>`);
+        });
+    }
+
+    // Update basket modal on document ready
+    updateBasketModal();
 
     // Function to update the basket dropdown
     function updateBasketDropdown() {
@@ -256,17 +308,27 @@
         }
         // Save basket items to sessionStorage
         sessionStorage.setItem('basketItems', JSON.stringify(basketItems));
+
+        // Update basket dropdown and modal
+        updateBasketDropdown();
+        updateBasketModal();
     }
 
     // Handle item button click to add item to the basket
     $(".item-btn").click(function() {
         var itemName = $(this).data("item");
         addItemToBasket(itemName); // Add item to basket
-        updateBasketDropdown(); // Update basket dropdown
     });
 
-    // Function to send order message to Discord
-    function sendOrderMessage(message) {
+    // Handle clear basket button click
+    $(".clear-basket").click(function() {
+        basketItems = {}; // Clear basket
+        sessionStorage.removeItem('basketItems'); // Remove basket items from sessionStorage
+        updateBasketDropdown(); // Update basket dropdown
+        updateBasketModal(); // Update basket modal
+    });
+
+     function sendOrderMessage(message) {
         const webhookUrl = "https://discord.com/api/webhooks/1235604187933315213/uhfR9jK7yYaiKuUXe0_NOprTcVSmdqufnkAtykNE_DgAQ6KRbyUjnB6GO0P0EfTiovYq"; // Replace this with your Discord webhook URL
 
         // Send the message to Discord using webhook
@@ -364,8 +426,8 @@
 });
 
 
-    </script>
-    
 
+</script> 
+    
 </body>
 </html>

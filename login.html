@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Group Messenger</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <!-- Navbar with profile icon, logout, and login button -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Telegram</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Profile icon -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-user-circle" id="profileIcon"></i>
+                        <span id="username" class="ml-2"></span>
+                    </a>
+                </li>
+                <!-- Logout button -->
+                <li class="nav-item">
+                    <button id="logoutBtn" class="btn btn-link nav-link">Logout</button>
+                </li>
+                <!-- Login button -->
+                <li class="nav-item">
+                    <button id="loginBtn" class="btn btn-link nav-link">Login</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="container mt-5">
+        <!-- Vbucks content -->
+        <h3>V-Bucks Page</h3>
+        <!-- Add V-Bucks content here -->
+
+        <!-- Login and signup forms -->
+        <div class="row">
+            <!-- Signup Form -->
+            <div class="col-md-6">
+                <h3>Sign Up</h3>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signupUsername">Telegram Username:</label>
+                        <input type="text" class="form-control" id="signupUsername" placeholder="Enter your Telegram username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password:</label>
+                        <input type="password" class="form-control" id="signupPassword" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                    <div id="signupError" class="error-message"></div>
+                </form>
+            </div>
+            <!-- Login Form -->
+            <div class="col-md-6">
+                <h3>Login</h3>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginUsername">Telegram Username:</label>
+                        <input type="text" class="form-control" id="loginUsername" placeholder="Enter your Telegram username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <div id="loginError" class="error-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script src="main.js"></script>
+
+</body>
+</html>

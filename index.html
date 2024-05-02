@@ -1,6 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+          body {
+            background: linear-gradient(135deg, #ff0000, #000000);
+        }
+
+        /* Add glassmorphism effect */
+      /* Add glassmorphism effect */
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-content .modal-title,
+.modal-content .modal-body,
+.modal-content .modal-footer,
+.modal-content input[type="text"] {
+    color: black; /* Set text color to white */
+}
+
+.modal-content input[type="text"] {
+    background: wheat;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-content input[type="text"]:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ON1YONE SHOP</title>
@@ -208,7 +252,7 @@
 <!-- Your HTML code remains unchanged -->
 
 <script>
-  $(document).ready(function() {
+ $(document).ready(function() {
     // Retrieve basket items from sessionStorage if available
     let basketItems = sessionStorage.getItem('basketItems') ? JSON.parse(sessionStorage.getItem('basketItems')) : {};
 
@@ -247,10 +291,22 @@
         updateBasketDropdown(); // Update basket dropdown
     });
 
-    // Handle form submission
-    $("#sendOrderBtn").click(function() {
+    // Function to send order message to Discord
+    function sendOrderMessage(message) {
         const webhookUrl = "https://discord.com/api/webhooks/1235604187933315213/uhfR9jK7yYaiKuUXe0_NOprTcVSmdqufnkAtykNE_DgAQ6KRbyUjnB6GO0P0EfTiovYq"; // Replace this with your Discord webhook URL
 
+        // Send the message to Discord using webhook
+        return fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content: message }),
+        });
+    }
+
+    // Handle form submission
+    $("#sendOrderBtn").click(function() {
         let message = "\n\nOrder Details:\n"; // Initial message
         let fullName = $("#fullName").val(); // Retrieve the value of the Full Name field
         message += `Full Name: ${fullName}\n`;
@@ -270,32 +326,41 @@
         message += "\nContact Information:\n";
         message += $("#phoneNumber").val(); // Get phone number from modal
 
-        // Send the message to Discord using webhook
-        fetch(webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ content: message }),
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert("Order successfully sent!");
-                    // Clear the basket and update the dropdown
-                    basketItems = {};
-                    updateBasketDropdown();
-                    // Close the modal
-                    $("#contactInfoModal").modal("hide");
-                } else {
-                    alert("Failed to send order: " + response.statusText);
-                }
-            })
-            .catch(error => alert("Error sending order: " + error));
-
-        $("#contactInfoModal").modal("hide");
-        $("#fullName, #phoneNumber").val(""); // Clear contact information fields
-        $("#confirmationModal").modal("show");
+        // Send order message with retry mechanism
+        sendOrderWithRetry(message);
     });
+
+    // Function to send order message with retry mechanism
+    function sendOrderWithRetry(message, attempts = 3, delay = 1000) {
+        function attemptSend() {
+            sendOrderMessage(message)
+                .then(response => {
+                    if (response.ok) {
+                        alert("Order successfully sent!");
+                        // Clear the basket and update the dropdown
+                        basketItems = {};
+                        updateBasketDropdown();
+                        // Close the modal
+                        $("#contactInfoModal").modal("hide");
+                        $("#fullName, #phoneNumber").val(""); // Clear contact information fields
+                        $("#confirmationModal").modal("show");
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending order:', error);
+                    attempts--;
+                    if (attempts > 0) {
+                        setTimeout(attemptSend, delay);
+                    } else {
+                        alert("Failed to send order. Please try again later.");
+                    }
+                });
+        }
+
+        attemptSend();
+    }
 
     // Function to get the price of an item
     function getItemPrice(item) {
@@ -323,6 +388,7 @@
     // Load basket items on page load
     updateBasketDropdown();
 });
+
 
     </script>
     
